@@ -32,3 +32,9 @@ func _on_rock_exploded(size, radius, pos, vel):
    var newpos = pos + dir * radius
    var newvel = dir * vel.length()* 1.1
    spawn_rock(size - 1, newpos, newvel)
+
+##func _on_game_timer_timeout() -> void:
+ ##time_left -= 1
+ #$HUD.update_timer(time_left)
+ #if time_left <= 0:
+  #game_over()

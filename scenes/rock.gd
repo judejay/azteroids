@@ -5,12 +5,10 @@ var size
 var radius
 var scale_factor = 0.2
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
- pass # Replace with function body.
+ pass 
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
  pass
 
@@ -24,8 +22,6 @@ func start(_position, _velocity, _size):
  var shape = CircleShape2D.new()
  shape.radius = radius
  $CollisionShape2D.shape = shape
- #$CollisionShape2d.shape.radius = radius
- print(position)
  linear_velocity = _velocity
  angular_velocity = randf_range(-PI, PI)
  if $Explosion:
@@ -39,7 +35,6 @@ func _integrate_forces(physics_state):
  physics_state.transform = xform
 
 func explode():
-    print("explode")
     $CollisionShape2D.set_deferred("disabled", true)
     $Sprite2D .hide()
     $Explosion/AnimationPlayer.play("explosion")
