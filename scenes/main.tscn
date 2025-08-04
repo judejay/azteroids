@@ -34,3 +34,6 @@ rotation = -0.00861223
 position = Vector2(78, 83)
 
 [node name="HUD" parent="." instance=ExtResource("5_tbgi4")]
+
+[connection signal="lives_changed" from="Player" to="HUD" method="update_lives"]
+[connection signal="start_game" from="HUD" to="." method="new_game"]

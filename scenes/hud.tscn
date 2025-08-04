@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://c2forv1tr8lt8"]
+[gd_scene load_steps=8 format=3 uid="uid://c2forv1tr8lt8"]
 
 [ext_resource type="Script" uid="uid://hmjo6a5nvv4w" path="res://hud.gd" id="1_oo0fn"]
 [ext_resource type="FontFile" uid="uid://crbmcke5oc6sj" path="res://assets/kenvector_future_thin.ttf" id="2_5ysmq"]
 [ext_resource type="Texture2D" uid="uid://brsqium555qlx" path="res://assets/play_button.png" id="3_5ysmq"]
+[ext_resource type="Texture2D" uid="uid://cqc0a0cymydj1" path="res://assets/player_small.png" id="3_6fi6k"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_6fi6k"]
 font = ExtResource("2_5ysmq")
@@ -45,6 +46,21 @@ vertical_alignment = 1
 [node name="LivesContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 
+[node name="L1" type="TextureRect" parent="MarginContainer/HBoxContainer/LivesContainer"]
+layout_mode = 2
+texture = ExtResource("3_6fi6k")
+stretch_mode = 5
+
+[node name="L2" type="TextureRect" parent="MarginContainer/HBoxContainer/LivesContainer"]
+layout_mode = 2
+texture = ExtResource("3_6fi6k")
+stretch_mode = 5
+
+[node name="L3" type="TextureRect" parent="MarginContainer/HBoxContainer/LivesContainer"]
+layout_mode = 2
+texture = ExtResource("3_6fi6k")
+stretch_mode = 5
+
 [node name="Score" type="Label" parent="MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
@@ -79,7 +95,7 @@ offset_bottom = 31.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="Message" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 text = "Space Rocks!"
 label_settings = SubResource("LabelSettings_047uy")

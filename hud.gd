@@ -1,6 +1,8 @@
 extends CanvasLayer
 signal start_game
 @onready var start_button = $VBoxContainer/StartButton
+@onready var lives_counter = $MarginContainer/HBoxContainer/LivesContainer.get_children()
+@onready var message = $VBoxContainer/Message
 
 func update_score(value):
  $MarginContainer/Score.text = str(value)
@@ -18,20 +20,21 @@ func _process(delta: float) -> void:
  pass
 
 func show_message(text):
- $Message.text = text
- $Message.show()
+ message.text = text
+ message.show()
  $Timer.start()
 
 func _on_timer_timeout() -> void:
-  $Message.hide()
+  message.hide()
 
-func show_game_over():
+func game_over():
  show_message("Game Over")
  await $Timer.timeout
- $StartButton.show()
- $Message.text = "Coin Dash!"
- $Message.show()
+ start_button.show()
 
+func update_lives(value):
+    for item in 3:
+        lives_counter[item].visible = value > item
 
 func _on_start_button_pressed() -> void:
  $VBoxContainer.hide()

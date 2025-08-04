@@ -1,16 +1,29 @@
 extends RigidBody2D
+
+signal lives_changed
+signal shield_changed
+signal dead
+@onready var sprite_2d: Sprite2D = $Sprite2D
+
 @onready var muzzle_: Marker2D = $"Muzzle"
 @export var engine_power = 500
 @export var spin_power = 8000
-var thrust = Vector2.ZERO
-var rotation_dir = 0
-var screensize = Vector2.ZERO
+
 @export var bullet_scene : PackedScene
 @export var fire_rate = 0.25
+@export var max_shield = 100.0
 
 var can_shoot = true
 enum {INIT, ALIVE, DEAD, INVULNERABLE}
 var state = INIT
+var reset_pos = false
+var lives = 0: set = set_lives
+var thrust = Vector2.ZERO
+var rotation_dir = 0
+var screensize = Vector2.ZERO
+var shield = 0: set = set_shield
+
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -24,6 +37,26 @@ func _integrate_forces(physics_state):
     xform.origin.x = wrapf(xform.origin.x, 0, screensize.x)
     xform.origin.y = wrapf(xform.origin.y, 0, screensize.y)
     physics_state.transform = xform
+    if reset_pos:
+      physics_state.transform.origin = screensize / 2
+      reset_pos = false
+    
+func set_shield(value):
+    value = min(value, max_shield)
+    shield = value 
+    shield_changed.emit(shield / max_shield)
+    if shield <= 0:
+        lives -= 1
+        explode()
+            
+func set_lives(value):
+    lives = value
+    shield = max_shield
+    lives_changed.emit(lives)
+    if lives <= 0:
+        change_state(DEAD)
+    else:
+        change_state(INVULNERABLE)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -53,6 +86,9 @@ func get_input():
         thrust = transform.x * engine_power
         rotation_dir = Input.get_axis("rotate_left", "rotate_right")
         
+func explode():
+   pass
+        
 func _physics_process(delta):
     constant_force = thrust
     constant_torque = rotation_dir * spin_power
@@ -71,5 +107,11 @@ func _on_gun_cooldown_timeout():
  can_shoot = true
 
 
+func reset():
+    reset_pos = true
+    sprite_2d.show()
+    lives = 3
+    change_state(ALIVE)
+    shield = max_shield
 
     
