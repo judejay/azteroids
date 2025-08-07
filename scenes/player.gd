@@ -76,15 +76,21 @@ func change_state(new_state):
     state = new_state
     
 func get_input():
-    
-    if Input.is_action_pressed("shoot") and can_shoot:
-     shoot()
     thrust = Vector2.ZERO
+    #$Exhaust.emitting = false
     if state in [DEAD, INIT]:
         return
     if Input.is_action_pressed("thrust"):
         thrust = transform.x * engine_power
-        rotation_dir = Input.get_axis("rotate_left", "rotate_right")
+        #$Exhaust.emitting = true
+        #if not $EngineSound.playing:
+            #$EngineSound.play()
+    else:
+        #$EngineSound.stop()
+        pass
+    rotation_dir = Input.get_axis("rotate_left", "rotate_right")
+    if Input.is_action_pressed("shoot") and can_shoot:
+        shoot()
         
 func explode():
    pass

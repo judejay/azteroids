@@ -1,4 +1,5 @@
 extends Node2D
+@onready var hud: CanvasLayer = $HUD
 
 @export var rock_scene : PackedScene
 var screensize = Vector2.ZERO
@@ -39,30 +40,23 @@ func _on_rock_exploded(size, radius, pos, vel):
    var newvel = dir * vel.length()* 1.1
    spawn_rock(size - 1, newpos, newvel)
 
-##func _on_game_timer_timeout() -> void:
- ##time_left -= 1
- #$HUD.update_timer(time_left)
- #if time_left <= 0:
-  #game_over()
-
 
 func new_game():
- # remove any old rocks from previous game
  get_tree().call_group("rocks", "queue_free")
  level = 0
  score = 0
- $HUD.update_score(score)
- $HUD.show_message("Get Ready!")
+ hud.update_score(score)
+ hud.show_message("Get Ready!")
  $Player.reset()
  await $HUD/Timer.timeout
  playing = true
 
 func new_level():
  level += 1
- $HUD.show_message("Wave %s" % level)
+ hud.show_message("Wave %s" % level)
  for i in level:
   spawn_rock(3)
 
 func game_over():
  playing = false
- $HUD.game_over()
+ hud.game_over()

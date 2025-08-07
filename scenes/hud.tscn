@@ -61,15 +61,6 @@ layout_mode = 2
 texture = ExtResource("3_6fi6k")
 stretch_mode = 5
 
-[node name="Score" type="Label" parent="MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 8
-text = "0
-"
-label_settings = SubResource("LabelSettings_uo2fv")
-horizontal_alignment = 2
-vertical_alignment = 1
-
 [node name="Time" type="Label" parent="MarginContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_5ysmq")

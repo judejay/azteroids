@@ -37,5 +37,5 @@ func update_lives(value):
         lives_counter[item].visible = value > item
 
 func _on_start_button_pressed() -> void:
- $VBoxContainer.hide()
+ start_button.hide()
  start_game.emit()
