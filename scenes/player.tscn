@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://swv0dsfeyswv"]
+[gd_scene load_steps=7 format=3 uid="uid://swv0dsfeyswv"]
 
 [ext_resource type="Texture2D" uid="uid://chenwivbj2r4m" path="res://assets/player_ship.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://cob3ut61m2s0k" path="res://scenes/player.gd" id="1_g2els"]
@@ -6,6 +6,14 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g2els"]
 radius = 36.3456
+
+[sub_resource type="Curve" id="Curve_qhqgy"]
+_data = [Vector2(0.0080429, 0.891441), 0.0, 0.0, 0, 0, Vector2(0.994638, 0.165449), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_qhqgy"]
+offsets = PackedFloat32Array(0, 0.409222)
+colors = PackedColorArray(0.862745, 0.219608, 0, 1, 0.807843, 0.431373, 0.564706, 1)
 
 [node name="Player" type="RigidBody2D"]
 linear_damp = 1.0
@@ -28,5 +36,22 @@ position = Vector2(50, 0)
 [node name="GunCooldown" type="Timer" parent="."]
 one_shot = true
 autostart = true
+
+[node name="Exhaust" type="CPUParticles2D" parent="."]
+show_behind_parent = true
+position = Vector2(-28, 0)
+rotation = 3.14159
+amount = 25
+lifetime = 0.1
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(1, 5)
+spread = 0.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 400.0
+scale_amount_max = 8.0
+scale_amount_curve = SubResource("Curve_qhqgy")
+color = Color(0.980392, 0.0784314, 0.352941, 1)
+color_ramp = SubResource("Gradient_qhqgy")
 
 [connection signal="timeout" from="GunCooldown" to="." method="_on_gun_cooldown_timeout"]

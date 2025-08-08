@@ -5,7 +5,7 @@ signal start_game
 @onready var message = $VBoxContainer/Message
 
 func update_score(value):
- $MarginContainer/Score.text = str(value)
+ $MarginContainer/HBoxContainer/ScoreLabel.text = str(value)
 
 func update_timer(value):
   $MarginContainer/Time.text = str(value)

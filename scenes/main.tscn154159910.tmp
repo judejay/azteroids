@@ -13,7 +13,6 @@ _data = {
 point_count = 7
 
 [node name="Main" type="Node2D"]
-process_mode = 3
 script = ExtResource("1_sugp2")
 rock_scene = ExtResource("2_jyhfs")
 
@@ -33,6 +32,10 @@ rotation = -0.00861223
 
 [node name="Player" parent="." instance=ExtResource("2_sugp2")]
 position = Vector2(363, 366)
+engine_power = null
+spin_power = null
+fire_rate = null
+max_shield = null
 
 [node name="HUD" parent="." instance=ExtResource("5_tbgi4")]
 

@@ -13,7 +13,6 @@ func _process(delta: float) -> void:
  pass
 
 func start(_position, _velocity, _size):
-
  position = _position
  size = _size
  mass = 1.5 * size

@@ -25,7 +25,6 @@ var shield = 0: set = set_shield
 
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     change_state(ALIVE)
     screensize = get_viewport_rect().size
@@ -58,7 +57,6 @@ func set_lives(value):
     else:
         change_state(INVULNERABLE)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
     get_input()
 
@@ -76,13 +74,13 @@ func change_state(new_state):
     state = new_state
     
 func get_input():
+    $Exhaust.emitting = false
     thrust = Vector2.ZERO
-    #$Exhaust.emitting = false
     if state in [DEAD, INIT]:
         return
     if Input.is_action_pressed("thrust"):
         thrust = transform.x * engine_power
-        #$Exhaust.emitting = true
+        $Exhaust.emitting = true
         #if not $EngineSound.playing:
             #$EngineSound.play()
     else:
