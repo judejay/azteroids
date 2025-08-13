@@ -24,16 +24,20 @@ _data = {
 }
 point_count = 7
 
-[node name="EnemyPaths" type="Node2D"]
+[node name="EnemyPaths" type="Node"]
 
 [node name="Path2D" type="Path2D" parent="."]
+visible = false
 curve = SubResource("Curve2D_s4uk7")
 
 [node name="Path2D2" type="Path2D" parent="."]
+visible = false
 curve = SubResource("Curve2D_e5wnm")
 
 [node name="Path2D3" type="Path2D" parent="."]
+visible = false
 curve = SubResource("Curve2D_bqp0i")
 
 [node name="Path2D4" type="Path2D" parent="."]
+visible = false
 curve = SubResource("Curve2D_bmms0")

@@ -2,6 +2,8 @@ extends Node2D
 @onready var hud: CanvasLayer = $HUD
 
 @export var rock_scene : PackedScene
+@export var enemy_scene : PackedScene
+
 var screensize = Vector2.ZERO
 var level = 0
 var score = 0
@@ -50,6 +52,8 @@ func new_game():
  $Player.reset()
  await $HUD/Timer.timeout
  playing = true
+ $EnemyTimer.start(randf_range(5, 10))
+
 
 func new_level():
  level += 1
@@ -73,3 +77,10 @@ func _input(event):
     else:
       message.text = ""
       message.hide()
+
+
+func _on_enemy_timer_timeout():
+   var e = enemy_scene.instantiate()
+   add_child(e)
+   e.target = $Player
+   $EnemyTimer.start(randf_range(20, 40))

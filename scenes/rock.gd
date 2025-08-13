@@ -24,7 +24,7 @@ func start(_position, _velocity, _size):
  linear_velocity = _velocity
  angular_velocity = randf_range(-PI, PI)
  if $Explosion:
-    $Explosion.scale = Vector2.ONE * 0.75 * size
+  $Explosion.scale = Vector2.ONE * 0.75 * size
 
 
 func _integrate_forces(physics_state):
